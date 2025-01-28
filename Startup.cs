@@ -34,13 +34,14 @@ namespace AdventureWorks.Web
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(services => services.EnableEndpointRouting = false);
+            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<sampledbContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("sampledbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //if (env.IsDevelopment())
             //{
@@ -53,9 +54,9 @@ namespace AdventureWorks.Web
             //}
 
             app.UseDeveloperExceptionPage();
+            
 
-
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
